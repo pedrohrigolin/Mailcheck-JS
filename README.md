@@ -1,34 +1,62 @@
-Verificador de emails para JS
+# 📧 Mailcheck-JS
 
-Forma de uso:
+Simple email validator for JavaScript.
 
-    var check = new Mailcheck();
+---
 
-    check.check(email, opções);
+## 🚀 Usage
 
-    ou
+```js
+var check = new Mailcheck();
+check.check(email, options);
 
-    Mailcheck.check(email, opções)
+// or directly
+Mailcheck.check(email, options);
+```
 
-O único parâmetro necessário é o email. Se somente o email for informado, a verificação feita será a estrutura do email, permitindo uma string da seguinte maneira: [A-Z a-z 1-9 . _ % + - ç Ç] + @ + [a-z A-Z 0-9 . -] + [a-z A-Z] (pelo menos 2 dígitos). Pode conter qualquer letras, símbolos e números dentro dos colchetes, seguindo a estrutura informada.
+The only required parameter is the email.
 
-O retorno pode ser true, caso o email passe na verificação, e false caso não passe na verificação.
+---
 
-Pode ser usado 3 opções para a verificação de email, que são as seguintes:
+## 🔍 Validation options
 
-  check.check(email, 1) : 
-  
-   A opção 1 permite a mesma estrutura anterior, mas o final do email deve conter .com ou .com.br ou .br, qualque email que não tenha essas terminações será recusado.
+1️⃣ **Basic structure** (default)  
+Validates the email structure with allowed characters:  
+`[A-Z a-z 0-9 . _ % + - ç Ç] + @ + [a-z A-Z 0-9 . -] + [a-z A-Z]{2,}`  
+Returns `true` if valid, `false` otherwise.
 
-  check.check(email, 2) : 
-  
-   A opção 2 permite a mesma estrutura da primeira parte ( [A-Z a-z 1-9 . _ % + - ç Ç] ) seguido dos seguintes provedores de email:(gmail.com|outlook.com|outlook.com.br|hotmail.com|hotmail.com.br|live.com|live.com.br|yahoo.com|yahoo.com.br|terra.com|terra.com.br|icloud.com|uol.com.br|myyahoo.com|myyahoo.com.br). 
-  Essa opção é útil para permitir somente emails pessoais.
+2️⃣ **Option 1**  
+In addition to the basic structure, the domain must end with `.com`, `.com.br`, or `.br`.  
+Emails without these endings will be rejected.
 
-  check.check(email, [array ou string separada por | ou vírgula): 
-  
-   A última opção permite a mesma estrutura da primeira parte ( [A-Z a-z 1-9 . _ % + - ç Ç] ) e a estrutura restante pode ser informada por meio de um array ou string separada por | ou vírgula, por exemplo: 
-  
-      check.check(email, new Array(@gmail.com, @hotmail.com);
-      check.check(email, "@gmail.com, @hotmail.com");
-      check.check(email, "@gmail.com|@hotmail.com");
+3️⃣ **Option 2**  
+Allows only personal emails from common providers:  
+`gmail.com | outlook.com | outlook.com.br | hotmail.com | hotmail.com.br | live.com | live.com.br | yahoo.com | yahoo.com.br | terra.com | terra.com.br | icloud.com | uol.com.br | myyahoo.com | myyahoo.com.br`
+
+4️⃣ **Custom option**  
+Accepts an array or string (separated by `|` or comma) with allowed domains, for example:
+
+```js
+check.check(email, ['@gmail.com', '@hotmail.com']);
+check.check(email, '@gmail.com,@hotmail.com');
+check.check(email, '@gmail.com|@hotmail.com');
+```
+
+---
+
+## ⚠️ Important notes
+
+- This version of **Mailcheck-JS** was one of the first codes derived from **Mailcheck-PHP** (v0.0.1), converted to JavaScript.  
+- Currently, this library is outdated compared to the PHP version.  
+- I plan to remake this JS library after finishing the PHP version refactor, but there's no timeline yet.
+
+---
+
+## 🔗 Relation with Mailcheck-PHP
+
+The **Mailcheck-JS** library was inspired by **Mailcheck-PHP**, created to provide combined front-end and back-end validation.
+
+Check out the PHP project here:  
+[Mailcheck-PHP](https://github.com/pedrohrigolin/Mailcheck-PHP)
+
+---
